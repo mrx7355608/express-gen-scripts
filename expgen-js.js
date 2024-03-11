@@ -8,7 +8,7 @@ function main() {
     }
 
     // Setup folder structure
-    console.log("Setting up project structure...")
+    console.log("\nSetting up project structure...")
     fs.mkdirSync("./backend")
     fs.mkdirSync("./backend/src")
     fs.mkdirSync("./backend/src/features")
@@ -16,7 +16,7 @@ function main() {
     fs.mkdirSync("./backend/src/middlewares")
 
     // Setup prettier
-    console.log("Setting up prettier...")
+    console.log("\nSetting up prettier...")
     const prettierrcContent = {
         semi: true,
         singleQuote: false,
@@ -28,11 +28,16 @@ function main() {
     console.log("SUCCESS: Successfully created .prettierrc.json file");
 
     // Create .env file with basic variables
+    console.log("\nSetting up secrets...")
+    const envContent = `DB_URL=""\nSESSIONS_SECRET=""\nNODE_ENV="developemnt"`
+    fsWriteFile("./backend/.env", envContent)
+    console.log("SUCCESS: Successfully created .env file");
+
     // Create app.js and index.js with code
 }
 
 function fsWriteFile(filename, fileContent) {
-    fs.writeFileSync(filename, fileContent, err => {
+    fs.writeFileSync(filename, fileContent, (err) => {
         if (err) {
             console.log(`ERROR: Unable to create ${filename} file`, err.message);
         } 
